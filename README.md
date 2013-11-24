@@ -21,3 +21,9 @@ Written as a quick hack so I could make my slides in my beloved inkscape with mi
 For real prezzi like fanciness have a look at [Sozi](http://sozi.baierouge.fr/)
 
 License : MIT.
+
+## FAQ
+
+### My text doesn't show up
+
+See [this section in the Inkscape FAQ](http://wiki.inkscape.org/wiki/index.php/FAQ#What_about_flowed_text.3F). Inkscape has two types of text nodes, flowed and regular. Browsers can only display the regular type. Convert your text using "Convert to Text" in the Text menu, or convert to paths. The last option has the downside that you can no longer edit the text as text, but it has the upside that you're not depedent on fonts to be available.
