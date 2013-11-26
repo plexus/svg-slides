@@ -28,6 +28,7 @@ end
 result = TEMPLATE
   .replace('svg') { svg }
   .replace('style') {|style| style.set_children([style.text.sub('}', "background-color: #{bgcolor}; }")])} # :(
+  .replace('head') {|head| head << H[:title, INFILE.to_s]}
 
 File.write(OUTFILE, result.to_html(html5: true))
 
