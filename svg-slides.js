@@ -5,7 +5,12 @@ var SvgSlides = (function() {
 
   function initialize() {
     document.addEventListener( 'keydown', onDocumentKeyDown, false );
-    slide(0);
+    var num = parseInt(window.location.hash.replace(/#/, ''));
+    if (isNaN(num)) {
+      slide(0);
+    } else {
+      slide(num);
+    }
     center();
   }
 
@@ -18,11 +23,11 @@ var SvgSlides = (function() {
   }
 
   function center() {
-    wrapper().style['position']   = 'absolute'
-    wrapper().style['top']    = '50%';
-    wrapper().style['left']   = '50%';
-    wrapper().style['margin-left']   = '-' + slideWidth() / 2;
-    wrapper().style['margin-top']   = '-' + slideHeight() / 2;
+    wrapper().style.position   = 'absolute'
+    wrapper().style.top        = '50%';
+    wrapper().style.left       = '50%';
+    wrapper().style.marginLeft = '-' + slideWidth() / 2;
+    wrapper().style.marginTop  = '-' + slideHeight() / 2;
   }
 
   function slideWidth() {
@@ -36,6 +41,7 @@ var SvgSlides = (function() {
   function slide(n) {
     currentSlide = n;
     updateViewbox(n * slideWidth(), 0, slideWidth(), slideHeight());
+    window.location.hash = '#' + n
   }
 
   function updateViewbox(x, y, w, h) {
@@ -61,12 +67,14 @@ var SvgSlides = (function() {
     case 80: //p
     case 33: //page up
     case 37: //left
-      navigatePrev(); break;
+      navigatePrev();
+      break;
     case 78: //n
     case 34: //page down
     case 32: //space
     case 39: //right
-      navigateNext(); break;
+      navigateNext();
+      break;
       // h, left
     // case 72: case 37: navigateLeft(); break;
     //   // l, right
@@ -75,8 +83,11 @@ var SvgSlides = (function() {
     // case 75: case 38: navigateUp(); break;
     //   // j, down
     // case 74: case 40: navigateDown(); break;
-    //   // home
-    // case 36: slide( 0 ); break;
+
+    case 36: // home
+    case 48: // 0
+      slide(0);
+      break;
     //   // end
     // case 35: slide( Number.MAX_VALUE ); break;
     //   // space
